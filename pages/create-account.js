@@ -2,14 +2,27 @@ import InputLabel from "../components/InputLabel";
 import { useForm } from "react-hook-form";
 import InputError from "../components/InputError";
 import {useRef} from "react";
+import {gql, useMutation} from "@apollo/client";
+import { useRouter } from "next/router";
+import { CREATE_ACCOUNT } from "../constantsGQL";
 
 export default function CreateAccount() {
+    const router = useRouter();
     const { register, formState: { errors }, handleSubmit, watch } = useForm();
     const password = useRef({});
     password.current = watch('password', '');
+    const [createAccount] = useMutation(CREATE_ACCOUNT);
 
     const createAccountFormSubmit = (data, e) => {
-
+        createAccount({
+            variables: {
+                name: data.name,
+                email: data.email,
+                password: data.password
+            }
+        })
+            .then(() => router.push('/login'))
+            .catch(err => console.log(err))
     }
 
     return(
@@ -21,6 +34,17 @@ export default function CreateAccount() {
                         onSubmit={handleSubmit(createAccountFormSubmit)}
                     >
                         <h4>Crear una cuenta</h4>
+                        <div className="field">
+                            <InputLabel text="Nombre" />
+                            <div className="control">
+                                <input
+                                    type="text"
+                                    name="name"
+                                    { ...register('name', { required: true }) }
+                                />
+                            </div>
+                            { errors.name && <InputError text="El nombre es requerido" /> }
+                        </div>
                         <div className="field">
                             <InputLabel text="Correo"/>
                             <div className="control">

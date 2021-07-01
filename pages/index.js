@@ -2,23 +2,25 @@ import Head from 'next/head'
 import Image from 'next/image'
 import styles from '../styles/Home.module.scss'
 import client from "../apollo-client";
-import { gql } from "@apollo/client";
+import { gql, useQuery } from "@apollo/client";
+import {useEffect, useState} from "react";
 
 export async function getServerSideProps() {
+  const PRODUCTS = gql`
+  query($name: String, $sku: String, $minPrice: Int, $maxPrice: Int, $vendorId: ID) {
+    products(filters: { name: $name, sku: $sku, minPrice: $minPrice, maxPrice: $maxPrice, vendorId: $vendorId }) {
+      _id
+      name
+      sku
+      quantity
+      price
+      vendor {
+        name
+      }
+    }
+  }`
   const { data } = await client.query({
-    query: gql`
-        query($name: String, $sku: String, $minPrice: Int, $maxPrice: Int, $vendorId: ID) {
-            products(filters: { name: $name, sku: $sku, minPrice: $minPrice, maxPrice: $maxPrice, vendorId: $vendorId }) {
-                _id
-                name
-                sku
-                quantity
-                price
-                vendor {
-                    name
-                }
-            }
-        }`
+    query: PRODUCTS
   });
 
   return {
@@ -27,6 +29,8 @@ export async function getServerSideProps() {
     }
   }
 }
+
+
 
 export default function Home({ products }) {
   return (
