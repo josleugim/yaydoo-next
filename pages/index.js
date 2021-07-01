@@ -1,36 +1,6 @@
 import Head from 'next/head'
 import Image from 'next/image'
 import styles from '../styles/Home.module.scss'
-import client from "../apollo-client";
-import { gql, useQuery } from "@apollo/client";
-import {useEffect, useState} from "react";
-
-export async function getServerSideProps() {
-  const PRODUCTS = gql`
-  query($name: String, $sku: String, $minPrice: Int, $maxPrice: Int, $vendorId: ID) {
-    products(filters: { name: $name, sku: $sku, minPrice: $minPrice, maxPrice: $maxPrice, vendorId: $vendorId }) {
-      _id
-      name
-      sku
-      quantity
-      price
-      vendor {
-        name
-      }
-    }
-  }`
-  const { data } = await client.query({
-    query: PRODUCTS
-  });
-
-  return {
-    props: {
-      products: data.products
-    }
-  }
-}
-
-
 
 export default function Home({ products }) {
   return (
@@ -46,16 +16,7 @@ export default function Home({ products }) {
           Welcome to <a href="https://nextjs.org">Next.js!</a>
         </h1>
       </main>
-        <div className={styles.grid}>
-            {products.map((product) => (
-                <div key={product._id} className={styles.card}>
-                    <h3>{product.name}</h3>
-                    <p>
-                        {product.sku} - {product.price}
-                    </p>
-                </div>
-            ))}
-        </div>
+
 
       <footer className={styles.footer}>
         <a
