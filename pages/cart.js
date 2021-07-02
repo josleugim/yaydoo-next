@@ -12,13 +12,13 @@ function Cart({token}) {
         token = sessionStorage.getItem(AUTH_TOKEN);
     }
     const [products, setProducts] = useState([]);
-    const { loading, data, error } = useQuery(MY_SHOPPING_CART);
+    /*const { loading, data, error } = useQuery(MY_SHOPPING_CART);
 
     useEffect(() => {
         if (data) {
             setProducts(data.myShoppingCart)
         }
-    }, [data])
+    }, [data])*/
 
     return (
         <div className="container">
@@ -28,7 +28,6 @@ function Cart({token}) {
                         <Link href="/cart">
                             <a className="navbar-item">
                                 Carrito
-                                <CartCount />
                             </a>
                         </Link>
                         <Link href="/create-account">
