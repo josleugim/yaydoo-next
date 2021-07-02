@@ -38,7 +38,6 @@ export default function Home({ }) {
                                 <Link href="/cart">
                                     <a className="navbar-item">
                                         Carrito
-                                        <CartCount />
                                     </a>
                                 </Link>
                             )

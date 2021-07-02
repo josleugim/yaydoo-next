@@ -29,6 +29,7 @@ export default function Product({token}) {
         sku: ''
     })
     const [getProducts, { loading, data, error }] = useLazyQuery(PRODUCTS, {
+        fetchPolicy: 'no-cache',
         variables: {
             name: searchForm.name,
             sku: searchForm.sku,
@@ -55,7 +56,6 @@ export default function Product({token}) {
                         <Link href="/cart">
                             <a className="navbar-item">
                                 Carrito
-                                <CartCount />
                             </a>
                         </Link>
                         <Link href="/create-account">
