@@ -1,6 +1,6 @@
 import Image from 'next/image'
 import styles from '../styles/Home.module.scss'
-import {AUTH_TOKEN} from "../constants";
+import {AUTH_TOKEN, ROLE} from "../constants";
 import Navbar from "../components/Navbar";
 import {useState} from "react";
 import Link from 'next/link'
@@ -8,19 +8,22 @@ import CartCount from "../components/CartCount";
 
 export async function getInitialProps(props) {
     let token = '';
+    let role = '';
     if (sessionStorage) {
         token = sessionStorage.getItem(AUTH_TOKEN);
+        role = sessionStorage.getItem(ROLE);
     }
 
     return {
-        token
+        token,
+        role
     }
 }
 
-export default function Home({ }) {
-    let token = '';
+export default function Home({token, role}) {
     if (typeof window !== 'undefined') {
         token = sessionStorage.getItem(AUTH_TOKEN);
+        role = sessionStorage.getItem(ROLE);
     }
     const [isModalActive, setIsModalActive] = useState(false);
     const handleRegisterClick = (e) => {
@@ -34,7 +37,7 @@ export default function Home({ }) {
                 <div className="navbar-menu">
                     <div className="navbar-end">
                         {
-                            token && (
+                            token && role === 'customer' && (
                                 <Link href="/cart">
                                     <a className="navbar-item">
                                         Carrito
