@@ -33,8 +33,8 @@ export default function Product() {
         variables: {
             name: searchForm.name,
             sku: searchForm.sku,
-            minPrice: Number(searchForm.minPrice),
-            maxPrice: Number(searchForm.maxPrice)
+            minPrice: searchForm.minPrice,
+            maxPrice: searchForm.maxPrice
         }
     })
 
