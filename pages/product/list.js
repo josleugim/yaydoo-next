@@ -2,8 +2,14 @@ import Navbar from "../../components/Navbar";
 import {useEffect, useState} from "react";
 import {useQuery} from "@apollo/client";
 import {PRODUCTS} from "../../constantsGQL";
+import {ROLE} from "../../constants";
+import InputLabel from "../../components/InputLabel";
 
 function List() {
+    let role = '';
+    if (typeof window !== 'undefined') {
+        role = sessionStorage.getItem(ROLE);
+    }
     const [productList, setProductList] = useState([]);
     const { loading, error, data } = useQuery(PRODUCTS, {
         errorPolicy: 'all'
@@ -15,6 +21,10 @@ function List() {
         }
 
     }, [data])
+
+    const handleOnChangeVendorName = (data) => {
+        console.log(data)
+    }
 
     return (
         <div className="container">
@@ -28,6 +38,14 @@ function List() {
                             <h3 className="title">Listado de productos</h3>
                         </div>
                     </div>
+                    <form>
+                        <div className="field">
+                            <InputLabel text="Filtrar por vendedor" />
+                            <div className="control">
+                                <input className="input" type="text" name="vendorName" onChange={(event) => handleOnChangeVendorName(event.target.value)} />
+                            </div>
+                        </div>
+                    </form>
                     <table className="table">
                         <thead>
                         <tr>
@@ -36,6 +54,11 @@ function List() {
                             <th>Sku</th>
                             <th>Cantidad</th>
                             <th>Precio</th>
+                            {
+                                role === 'admin' && (
+                                    <th>Vendedor</th>
+                                )
+                            }
                             <th>Opciones</th>
                         </tr>
                         </thead>
@@ -49,6 +72,11 @@ function List() {
                                         <td>{ product.sku }</td>
                                         <td>{ product.quantity }</td>
                                         <td>{ product.price }</td>
+                                        {
+                                            role === 'admin' && (
+                                                <th>{ product.vendor.name }</th>
+                                            )
+                                        }
                                         <td></td>
                                     </tr>
                                 )

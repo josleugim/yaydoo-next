@@ -39,6 +39,7 @@ export default function CreateAccount() {
                             <InputLabel text="Nombre" />
                             <div className="control">
                                 <input
+                                    className="input"
                                     type="text"
                                     name="name"
                                     { ...register('name', { required: true }) }
@@ -50,6 +51,7 @@ export default function CreateAccount() {
                             <InputLabel text="Correo"/>
                             <div className="control">
                                 <input
+                                    className="input"
                                     type="email"
                                     name="email"
                                     { ...register('email', { required: true }) }
@@ -61,6 +63,7 @@ export default function CreateAccount() {
                             <InputLabel text="Contraseña" />
                             <div className="control">
                                 <input
+                                    className="input"
                                     type="password"
                                     name="password"
                                     { ...register('password', { required: true }) }
@@ -72,6 +75,7 @@ export default function CreateAccount() {
                             <InputLabel text="Confirmar contraseña" />
                             <div className="control">
                                 <input
+                                    className="input"
                                     type="password"
                                     name="confirmPass"
                                     { ...register('confirmPass', {
@@ -92,6 +96,11 @@ export default function CreateAccount() {
                         <div className="columns">
                             <div className="column">
                                 <button type="submit" className="button is-info">Registrarme</button>
+                            </div>
+                            <div className="column">
+                                <Link href="/">
+                                    <a className="button">Regresar</a>
+                                </Link>
                             </div>
                         </div>
                     </form>
