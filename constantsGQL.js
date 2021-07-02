@@ -62,10 +62,38 @@ mutation($productId: ID!, $quantity: Int) {
 }
 `;
 
+const MY_SHOPPING_CART = gql`
+query {
+    myShoppingCart {
+        _id
+        productId {
+            _id
+            name
+            sku
+            price
+            quantity
+        }
+        customerId {
+            _id
+            name
+        }
+        quantity
+    }
+}
+`;
+
+const DELETE_SHOPPING_CART = gql`
+mutation($id: ID!) {
+    removeById(id: $id)
+}
+`;
+
 export {
     CREATE_ACCOUNT,
     PRODUCTS,
     LOGIN,
     CREATE_PRODUCT,
-    ADD_SHOPPING_CART
+    ADD_SHOPPING_CART,
+    MY_SHOPPING_CART,
+    DELETE_SHOPPING_CART
 }

@@ -5,6 +5,7 @@ import {AUTH_TOKEN} from "../constants";
 import Navbar from "../components/Navbar";
 import {useState} from "react";
 import Link from 'next/link'
+import CartCount from "../components/CartCount";
 
 export async function getStaticProps(context) {
 
@@ -29,8 +30,16 @@ export default function Home({ }) {
             <nav className="navbar" role="navigation" aria-label="main navigation">
                 <div className="navbar-menu">
                     <div className="navbar-end">
-                        <Link className="navbar-item" href="/create-account">
-                            Registrate
+                        <Link href="/cart">
+                            <a className="navbar-item">
+                                Carrito
+                                <CartCount />
+                            </a>
+                        </Link>
+                        <Link href="/create-account">
+                            <a className="navbar-item">
+                                Registrate
+                            </a>
                         </Link>
                     </div>
                 </div>

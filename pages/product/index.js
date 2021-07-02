@@ -6,6 +6,8 @@ import {useEffect, useState} from "react";
 import {useLazyQuery, useQuery} from "@apollo/client";
 import Navbar from "../../components/Navbar";
 import ProductBox from "../../components/ProductBox";
+import Link from "next/link";
+import CartCount from "../../components/CartCount";
 
 /*export async function getServerSideProps() {
     const { data } = await client.query({
@@ -19,7 +21,7 @@ import ProductBox from "../../components/ProductBox";
     }
 }*/
 
-export default function Product({}) {
+export default function Product({token}) {
     const { handleSubmit } = useForm();
     const [productList, setProductList] = useState([]);
     const [searchForm, setSearchForm] = useState({
@@ -47,6 +49,23 @@ export default function Product({}) {
     }
     return (
         <div className="container">
+            <nav className="navbar" role="navigation" aria-label="main navigation">
+                <div className="navbar-menu">
+                    <div className="navbar-end">
+                        <Link href="/cart">
+                            <a className="navbar-item">
+                                Carrito
+                                <CartCount />
+                            </a>
+                        </Link>
+                        <Link href="/create-account">
+                            <a className="navbar-item">
+                                Registrate
+                            </a>
+                        </Link>
+                    </div>
+                </div>
+            </nav>
             <div className="columns">
                 <div className="column is-2">
                     <Navbar />

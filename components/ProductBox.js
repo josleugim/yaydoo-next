@@ -1,10 +1,19 @@
 import styles from "./ProductBox.module.scss";
 import {useMutation} from "@apollo/client";
-import {ADD_SHOPPING_CART} from "../constantsGQL";
+import {ADD_SHOPPING_CART, MY_SHOPPING_CART} from "../constantsGQL";
+import Image from 'next/image'
+
+export async function getServerSideProps(props) {
+    return {}
+}
 
 function ProductBox(props) {
     const product = props.props;
-    const [addProduct] = useMutation(ADD_SHOPPING_CART);
+    const [addProduct] = useMutation(ADD_SHOPPING_CART, {
+        refetchQueries: [{
+            query: MY_SHOPPING_CART
+        }]
+    });
     const handleAddProduct = (productId) => {
         addProduct({
             variables: {
@@ -18,7 +27,7 @@ function ProductBox(props) {
     return (
         <div className={styles.product + ' box'}>
             <figure>
-                <img src="https://picsum.photos/200" alt="image" />
+                <Image src="https://picsum.photos/200" alt="image" width="200" height="200" />
                 <figcaption className={styles.name}>{ product.name }</figcaption>
             </figure>
             <hr />
