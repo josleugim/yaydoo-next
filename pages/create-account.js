@@ -2,9 +2,10 @@ import InputLabel from "../components/InputLabel";
 import { useForm } from "react-hook-form";
 import InputError from "../components/InputError";
 import {useRef} from "react";
-import {gql, useMutation} from "@apollo/client";
+import {useMutation} from "@apollo/client";
 import { useRouter } from "next/router";
 import { CREATE_ACCOUNT } from "../constantsGQL";
+import Link from "next/link";
 
 export default function CreateAccount() {
     const router = useRouter();
@@ -81,7 +82,18 @@ export default function CreateAccount() {
                             </div>
                             { errors.confirmPass && <InputError text={errors.confirmPass.message} /> }
                         </div>
-                        <button type="submit" className="button is-info">Registrarme</button>
+                        <div className="columns">
+                            <div className="column">
+                                <Link href="/login">
+                                    <a>Inicia sesión</a>
+                                </Link>
+                            </div>
+                        </div>
+                        <div className="columns">
+                            <div className="column">
+                                <button type="submit" className="button is-info">Registrarme</button>
+                            </div>
+                        </div>
                     </form>
                 </div>
             </div>

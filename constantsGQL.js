@@ -25,7 +25,47 @@ query($name: String, $sku: String, $minPrice: Int, $maxPrice: Int, $vendorId: ID
     }
 }`;
 
+const LOGIN = gql`
+mutation($email: String!, $password: String!) {
+    login(input: { email: $email, password: $password }) {
+        token
+        email
+        role
+    }
+}
+`;
+
+const CREATE_PRODUCT = gql`
+mutation($name: String, $sku: String, $quantity: Int, $price: Float) {
+    addProduct(input: { name: $name, sku: $sku, quantity: $quantity, price: $price }) {
+        _id
+        name
+        sku
+        quantity
+        price
+    }
+}
+`;
+
+const ADD_SHOPPING_CART = gql`
+mutation($productId: ID!, $quantity: Int) {
+    addShoppingCart(input: { productId: $productId, quantity: $quantity }) {
+        _id
+        productId {
+            _id
+        }
+        customerId {
+            _id
+        }
+        quantity
+    }
+}
+`;
+
 export {
     CREATE_ACCOUNT,
-    PRODUCTS
+    PRODUCTS,
+    LOGIN,
+    CREATE_PRODUCT,
+    ADD_SHOPPING_CART
 }
