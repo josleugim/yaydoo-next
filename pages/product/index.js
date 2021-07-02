@@ -28,7 +28,7 @@ export default function Product() {
         name: '',
         sku: ''
     })
-    /*const [getProducts, { loading, data, error }] = useQuery(PRODUCTS, {
+    const [getProducts, { loading, data, error }] = useLazyQuery(PRODUCTS, {
         fetchPolicy: 'network-only',
         variables: {
             name: searchForm.name,
@@ -36,12 +36,12 @@ export default function Product() {
             minPrice: Number(searchForm.minPrice),
             maxPrice: Number(searchForm.maxPrice)
         }
-    })*/
+    })
 
-    const { loading, data, error } = useQuery(PRODUCTS,
+    /*const { loading, data, error } = useQuery(PRODUCTS,
         {
             fetchPolicy: 'no-cache'
-        })
+        })*/
 
     useEffect(() => {
         if (data) {
@@ -77,6 +77,7 @@ export default function Product() {
                 </div>
                 <div className="column">
                     <form
+                        onSubmit={handleSubmit(getProducts)}
                     >
                         <div className="field">
                             <InputLabel text="Buscar por nombre" />
