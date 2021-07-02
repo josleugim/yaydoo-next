@@ -14,15 +14,24 @@ function Navbar() {
         <aside className={styles.nav}>
             <ul>
                 <li>
-                    <Link href={role === 'customer' ? '/product' : '/product/list'}>
-                        <a>Product</a>
+                    <Link href="/">
+                        <a>Home</a>
                     </Link>
                 </li>
                 <li>
-                    <Link href="/product/create">
-                        <a>Crear producto</a>
+                    <Link href={role === 'customer' ? '/product' : '/product/list'}>
+                        <a>Productos</a>
                     </Link>
                 </li>
+                {
+                    role === 'vendor' && (
+                        <li>
+                            <Link href="/product/create">
+                                <a>Crear producto</a>
+                            </Link>
+                        </li>
+                    )
+                }
                 <li>
                     <a
                         className="is-link"
