@@ -7,17 +7,6 @@ import {MY_SHOPPING_CART} from "../constantsGQL";
 import {useEffect, useState} from "react";
 import ShoppingCartProduct from "../components/ShoppingCartProduct";
 
-export async function getInitialProps(props) {
-    let token = '';
-    if (sessionStorage) {
-        token = sessionStorage.getItem(AUTH_TOKEN);
-    }
-
-    return {
-        token
-    }
-}
-
 function Cart({token}) {
     if (typeof window !== 'undefined' && !token) {
         token = sessionStorage.getItem(AUTH_TOKEN);
