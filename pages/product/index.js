@@ -21,7 +21,7 @@ import CartCount from "../../components/CartCount";
     }
 }*/
 
-export default function Product({token}) {
+export default function Product() {
     const { handleSubmit } = useForm();
     const [productList, setProductList] = useState([]);
     const [searchForm, setSearchForm] = useState({
