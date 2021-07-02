@@ -12,7 +12,8 @@ function List() {
     }
     const [productList, setProductList] = useState([]);
     const { loading, error, data } = useQuery(PRODUCTS, {
-        errorPolicy: 'all'
+        errorPolicy: 'all',
+        fetchPolicy: 'no-cache'
     });
 
     useEffect(() => {

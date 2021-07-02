@@ -19,7 +19,7 @@ function Create() {
                 price: Number(data.price)
             }
         })
-            .then(() => router.push('/product'))
+            .then(() => router.push('/product/list'))
             .catch(err => console.log(err))
     }
 
@@ -40,6 +40,7 @@ function Create() {
                                     <InputLabel text="Nombre" />
                                     <div className="control">
                                         <input
+                                            className="input"
                                             type="text"
                                             name="name"
                                             { ...register('name', { required: true }) }
@@ -55,6 +56,7 @@ function Create() {
                                     <InputLabel text="SKU" />
                                     <div className="control">
                                         <input
+                                            className="input"
                                             type="text"
                                             name="sku"
                                             { ...register('sku', { required: true }) }
@@ -70,6 +72,7 @@ function Create() {
                                     <InputLabel text="Cantidad" />
                                     <div className="control">
                                         <input
+                                            className="input"
                                             type="number"
                                             name="quantity"
                                             { ...register('quantity', { required: true }) }
@@ -85,6 +88,7 @@ function Create() {
                                     <InputLabel text="Precio" />
                                     <div className="control">
                                         <input
+                                            className="input"
                                             type="number"
                                             name="price"
                                             { ...register('price', { required: true }) }
