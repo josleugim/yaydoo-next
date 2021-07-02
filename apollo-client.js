@@ -2,14 +2,14 @@ import { ApolloClient, InMemoryCache } from "@apollo/client";
 import { createHttpLink } from "apollo-link-http";
 import { setContext } from "apollo-link-context";
 import { onError } from "@apollo/client/link/error";
-import {AUTH_TOKEN} from "./constants";
+import {API_URL, AUTH_TOKEN} from "./constants";
 
 const httpLink = createHttpLink({
-    uri: 'http://localhost:8081/graphql'
+    uri: `${API_URL}/graphql`
 });
 
 const authLink = setContext((_, { headers }) => {
-    let token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7InVzZXJJZCI6IjYwZGIyYWQ5NWJlZWJkMmM1NDk1NzM2NCIsInJvbGUiOiJ2ZW5kb3IifSwiaWF0IjoxNjI1MTY4OTMzLCJleHAiOjE2MjUyNTUzMzN9.0aA8yCt9Va3MK6aNWK2q2qwkbWQDQIvVqaoVElbZV8s';
+    let token = '';
     if (typeof window !== 'undefined') {
         token = sessionStorage.getItem(AUTH_TOKEN);
     }
