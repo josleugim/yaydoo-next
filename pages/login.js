@@ -85,6 +85,11 @@ export default function Login() {
                             <div className="column">
                                 <button type="submit" className="button is-info">Entrar</button>
                             </div>
+                            <div className="column">
+                                <Link href="/">
+                                    <a className="button">Regresar</a>
+                                </Link>
+                            </div>
                         </div>
                     </form>
                 </div>
